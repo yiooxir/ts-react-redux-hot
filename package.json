@@ -38,12 +38,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Glavin001/react-hot-ts.git"
+    "url": "git+https://github.com/yiooxir/ts-react-redux-hot.git"
   },
-  "author": "Glavin Wiechert",
+  "author": "Sergey Borovikov @yiooxir <spectrs55@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Glavin001/react-hot-ts/issues"
+    "url": "https://github.com/yiooxir/ts-react-redux-hot/issues"
   },
-  "homepage": "https://github.com/Glavin001/react-hot-ts#readme"
+  "homepage": "https://github.com/yiooxir/ts-react-redux-hot#readme"
 }

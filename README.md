@@ -1,6 +1,6 @@
-# react-hot-ts
+# ts-react-redux-hot
 
-> Demo of React Hot Reloading + TypeScript
+> Demo of React Redux Hot Reloading + TypeScript
 
 ## Install prerequisites
 
