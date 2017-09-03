@@ -1,7 +1,12 @@
 export interface Node<S> {
+  name?: string,
   hash: string,
   className?: string,
   style?: object,
+  content?: string | number | null,
+  baseTag: string,
+  src?: string,
+  href?: string,
   children: Array<S> | null
 }
 

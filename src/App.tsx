@@ -1,34 +1,30 @@
 import * as React from "react";
-import { NodeRender } from './components/application/node/node-render';
-import hash from './mock/mock_hash'
-import { connect } from './utils/connect'
-import * as actions from './actions/node.action'
+import { NodeRender } from 'components/application/node/node-render';
+import { connect } from 'utils/connect'
+import * as actions from 'actions/node.action'
+import {NNode, NodeHash} from "interfaces/node.interface";
+import { filter } from 'lodash'
 const styles: any = require('./styles.scss')
 
 
-@connect((state, ownProps) => ({a: 1}), actions)
-class App extends React.Component<any, any> {
-  interval: number;
+interface Props {
+  children?: any,
+  nodes?: NodeHash,
+  getNodes?: () => void
+}
 
-  //This state will be maintained during hot reloads
-  componentWillMount() {
-    // this.interval = window.setInterval(() => {
-    //   this.setState({count: this.state.count + 1})
-    // }, 1000);
-  }
+interface State {}
 
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
-  }
-
-  
+@connect((state, ownProps) => state, actions)
+class App extends React.Component<Props, State> {
   render() {
-    console.log(this.props)
+    const { nodes } = this.props
+    const rootNodes = filter(nodes, {parent: null})
     return (
       <div className={styles.me}>
         <h1>Hello world! 2113333</h1>
-        <NodeRender node={hash[0]} />
-        <button onClick={()=> this.props.myAction()}>click</button>
+        { rootNodes.map((node: NNode, i: number) => <NodeRender nodes={nodes} node={node} key={i} />)}
+        <button onClick={()=> this.props.getNodes()}>click</button>
       </div>
     );
   }

@@ -1,5 +1,16 @@
-import { NNode, TNode, NodeHash } from '../interfaces/node.interface'
+import { NNode, TNode, NodeHash } from 'interfaces/node.interface'
 import { get, pick, values, concat, flatten, filter } from 'lodash'
+
+function makeId() {
+  let text = "";
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (let i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+
 /**
  * normalize array of object by its hash
  *
@@ -53,5 +64,6 @@ function getDescendantIds(node: NNode, nodes: NodeHash, includeSelf = false): st
 export {
   normalize,
   toTree,
-  getDescendantIds
+  getDescendantIds,
+  makeId
 }

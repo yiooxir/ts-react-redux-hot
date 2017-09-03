@@ -2,20 +2,9 @@
 
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-// import { AppContainer } from "react-hot-loader"
-// import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-//noinspection TypeScriptCheckImport
 import { configureStore } from './store/config-store'
 import App from "./App"
-
-// const initialState = {}
-//
-// function todoApp(state = initialState, action) {
-//   // For now, don't handle any actions
-//   // and just return the state given to us.
-//   return state
-// }
 
 let store = configureStore()
 

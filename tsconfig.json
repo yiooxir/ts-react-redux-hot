@@ -10,6 +10,13 @@
         "target": "es5",
         "jsx": "react",
         "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "utils/*": ["./src/utils/*"],
+            "components/*": ["./src/components/*"],
+            "interfaces/*": ["./src/interfaces/*"],
+            "actions/*": ["./src/actions/*"]
+        },
         "types": [
             "webpack-env",
             "node",
