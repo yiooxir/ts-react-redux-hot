@@ -1,12 +1,14 @@
 import * as React from "react";
-import { Div } from './components/structure/div';
 import { NodeRender } from './components/application/node/node-render';
 import hash from './mock/mock_hash'
+import { connect } from './utils/connect'
+import * as actions from './actions/node.action'
 const styles: any = require('./styles.scss')
 
-export default class App extends React.Component<{}, { count: number; }> {
+
+@connect((state, ownProps) => ({a: 1}), actions)
+class App extends React.Component<any, any> {
   interval: number;
-  state = {count: 0};
 
   //This state will be maintained during hot reloads
   componentWillMount() {
@@ -21,12 +23,15 @@ export default class App extends React.Component<{}, { count: number; }> {
 
   
   render() {
+    console.log(this.props)
     return (
       <div className={styles.me}>
         <h1>Hello world! 2113333</h1>
-        <Div>hello wrld</Div>
         <NodeRender node={hash[0]} />
+        <button onClick={()=> this.props.myAction()}>click</button>
       </div>
     );
   }
 }
+
+export default App

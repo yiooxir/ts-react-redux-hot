@@ -1,21 +1,4 @@
-# ts-react-redux-hot
+#pb constructor
 
-> Demo of React Redux Hot Reloading + TypeScript
-
-## Install prerequisites
-
-```
-npm install
-```
-
-## Usage
-
-```
-npm start
-```
-
-### Docker
-
-```
-docker-compose up --build
-```
+## Ссылки
+redux - https://github.com/reactjs/redux/tree/master/examples/real-world/src

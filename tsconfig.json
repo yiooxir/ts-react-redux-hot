@@ -4,17 +4,22 @@
         "sourceMap": true,
         "noImplicitAny": false,
         "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "module": "commonjs",
-        "target": "es2016",
+        "target": "es5",
         "jsx": "react",
         "moduleResolution": "node",
         "types": [
             "webpack-env",
-            "node"
+            "node",
+            "mocha"
         ],
         "lib": [
             "dom",
             "es5",
+            "es6",
+            "es7",
             "scripthost",
             "es2015.iterable"
         ]
