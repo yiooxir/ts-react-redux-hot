@@ -1,5 +1,17 @@
 $my_color: red;
 
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
 .me {
   color: $my_color;
+  display: flex;
+  justify-content: space-around;
+}
+
+:global(.cont) {
+  min-width: 600px;
+  background: gold;
 }

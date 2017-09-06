@@ -1,5 +1,5 @@
 import hashTree from '../mock/mock_hash'
-import {normalize} from "utils/node-helpers";
+import {normalize, applyHash} from "utils/node-helpers";
 
 
 function getNodes() {
@@ -19,6 +19,20 @@ function getNodes() {
   }
 }
 
+function addToRoot(node) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'ADD_TO_ROOT',
+      payload: normalize([applyHash(node)])
+    })
+  }
+}
+
+function addToChildren() {
+
+}
+
 export {
-  getNodes
+  getNodes,
+  addToRoot
 }

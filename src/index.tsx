@@ -23,7 +23,7 @@ if (module.hot) {
     const NextApp = require<{'default': typeof App}>("./App").default
     ReactDOM.render(
       <Provider store={store}>
-        <NextApp />
+        <App />
       </Provider>
       ,
       rootEl

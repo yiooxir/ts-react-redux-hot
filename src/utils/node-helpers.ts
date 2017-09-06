@@ -1,5 +1,5 @@
 import { NNode, TNode, NodeHash } from 'interfaces/node.interface'
-import { get, pick, values, concat, flatten, filter } from 'lodash'
+import { get, pick, values, concat, flatten, filter, mapValues, cloneDeep } from 'lodash'
 
 function makeId() {
   let text = "";
@@ -26,10 +26,22 @@ function normalize(array, parent?) {
   }, {})
 }
 
+/**
+ * Helper
+ * Used to get a null instead of empty array
+ * @param {Array<any>} arr
+ * @returns {Array<any>}
+ */
 function arrOrNull(arr: Array<any>): Array<any> | null {
   return arr.length ? arr: null
 }
 
+/**
+ * Helper.
+ * Used for clear parent props before denormalize to tree nodes.
+ * @param {NNode} obj
+ * @returns {any}
+ */
 function withoutParent(obj: NNode): any {
   delete obj.parent
   return obj
@@ -47,7 +59,8 @@ function toTree(nodes: NodeHash, parent?: NNode): TNode[] {
 }
 
 /**
- * Collect all descendant node ids
+ * Collect all descendant node ids to array.
+ * Usefull for removing all child elements from normalized collection
  *
  * @param {Node} node
  * @param {NodeHash} nodes
@@ -61,9 +74,30 @@ function getDescendantIds(node: NNode, nodes: NodeHash, includeSelf = false): st
   return includeSelf ? concat(node.children, childrenIds) : childrenIds
 }
 
+/**
+ * Used to set a hash prop for all received nodes.
+ * Middleware for normalize repository node object before insert to store
+ * @param nodes
+ * @returns {NodeHash}
+ */
+function applyHash(node, isFirst = true): NodeHash {
+  let nNode = isFirst ? cloneDeep(node) : node
+
+  if (!nNode.hash) {
+    nNode.hash = makeId()
+  }
+
+  if (node.children) {
+    nNode.children.map((node: TNode) => applyHash(node, false))
+  }
+
+  return nNode
+}
+
 export {
   normalize,
   toTree,
   getDescendantIds,
-  makeId
+  makeId,
+  applyHash
 }

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { normalize, getDescendantIds, toTree } from './node-helpers'
+import { normalize, getDescendantIds, toTree, applyHash } from './node-helpers'
 
 describe('node-helpers.util', () => {
   const testHash = [{
@@ -92,6 +92,19 @@ describe('node-helpers.util', () => {
     it('should convert normalized list to node tree', () => {
       const res = toTree(testNodes)
       expect(res).to.be.an('array').that.deep.equal(resultTree)
+    })
+  })
+
+  describe('#applyHash', () => {
+    const testNode: any = {
+      children: [{},{}]
+    }
+
+    it('Should add hash for all children nodes', () => {
+      const res = applyHash(testNode)
+      expect(res).to.include.keys('hash')
+      expect(res.children[0]).to.include.keys('hash')
+      expect(res.children[1]).to.include.keys('hash')
     })
   })
 })

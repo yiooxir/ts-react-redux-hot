@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NodeRender } from 'components/application/node/node-render';
+import { AdminPanel} from "components/application/admin-panel";
 import { connect } from 'utils/connect'
 import * as actions from 'actions/node.action'
 import {NNode, NodeHash} from "interfaces/node.interface";
@@ -22,7 +23,7 @@ class App extends React.Component<Props, State> {
     const rootNodes = filter(nodes, {parent: null})
     return (
       <div className={styles.me}>
-        <h1>Hello world! 2113333</h1>
+        <AdminPanel />
         { rootNodes.map((node: NNode, i: number) => <NodeRender nodes={nodes} node={node} key={i} />)}
         <button onClick={()=> this.props.getNodes()}>click</button>
       </div>

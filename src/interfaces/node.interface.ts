@@ -1,3 +1,6 @@
+/**
+ * Base node object
+ */
 export interface Node<S> {
   name?: string,
   hash: string,
@@ -10,13 +13,22 @@ export interface Node<S> {
   children: Array<S> | null
 }
 
+/**
+ * Tree (plain) Node
+ */
 export interface TNode extends Node<TNode> {
 }
 
+/**
+ * Normalized Node
+ */
 export interface NNode extends Node<string>{
   parent: string
 }
 
+/**
+ * Normalized list of nodes
+ */
 export interface NodeHash {
   [id: string]: NNode
 }

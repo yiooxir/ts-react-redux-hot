@@ -10,6 +10,9 @@ const nodeReducer: Reducer<NodeHash> = (state = initialState, action) => {
     case 'API_GET_NODE_HASH_SUCCESS':
       return payload
 
+    case 'ADD_TO_ROOT':
+      return {...state, ...payload}
+
     default:
     case 'API_GET_NODE_HASH_PENDING':
       return state
