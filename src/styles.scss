@@ -1,16 +1,40 @@
-$my_color: red;
+$my_color: green;
 
 body, html {
   padding: 0;
   margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.me {
-  color: $my_color;
-  display: flex;
-  justify-content: space-around;
-}
+//.base_row {
+//  display: flex;
+//  justify-content: space-around;
+//}
+//
+//.me {
+//  color: $my_color;
+//  display: flex;
+//  justify-content: space-around;
+//}
 
+:global {
+  & #root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  & .base_row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & .base_content {
+    width: 600px;
+  }
+}
 :global(.cont) {
   min-width: 600px;
   background: gold;

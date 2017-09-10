@@ -1,34 +1,40 @@
+/* INTERFACES */
+import {NNode, NodeHash} from "interfaces/node.interface";
+
+/* MODULES */
 import * as React from "react";
 import { NodeRender } from 'components/application/node/node-render';
 import { AdminPanel} from "components/application/admin-panel";
 import { connect } from 'utils/connect'
 import * as actions from 'actions/node.action'
-import {NNode, NodeHash} from "interfaces/node.interface";
-import { filter } from 'lodash'
-const styles: any = require('./styles.scss')
+import { selector} from './selector'
+import { pick } from 'lodash'
 
 
 interface Props {
-  children?: any,
-  nodes?: NodeHash,
+  children?: any
+  nodes?: NodeHash
+  rootNodes?: Array<NNode>
   getNodes?: () => void
 }
 
 interface State {}
 
-@connect((state, ownProps) => state, actions)
+@connect(selector, actions)
 class App extends React.Component<Props, State> {
   render() {
-    const { nodes } = this.props
-    const rootNodes = filter(nodes, {parent: null})
+    const { nodes, rootNodes } = this.props
+
     return (
-      <div className={styles.me}>
+      <div>
         <AdminPanel />
-        { rootNodes.map((node: NNode, i: number) => <NodeRender nodes={nodes} node={node} key={i} />)}
+        { rootNodes.map((node: NNode, i: number) => <NodeRender nodes={nodes} node={node} key={i} ind={i + 1} />)}
         <button onClick={()=> this.props.getNodes()}>click</button>
       </div>
     );
   }
 }
 
-export default App
+export {
+  App
+}

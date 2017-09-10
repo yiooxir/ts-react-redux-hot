@@ -6,6 +6,7 @@ const config: webpack.Configuration = {
   entry: [
     "react-hot-loader/patch",
     "./src/index.tsx",
+    "./src/styles.scss",
   ],
   output: {
     path: path.join(__dirname, 'dist'),

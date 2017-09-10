@@ -18,12 +18,24 @@ function makeId() {
  * @param parent
  */
 function normalize(array, parent?) {
-  return array.reduce((res, obj) => {
+  const nodes = array.reduce((res, obj) => {
+    /* convert children to hash array */
     const children = obj.children ? obj.children.map(e => e.hash) : null
+    /* update object */
     res[obj.hash] = { ...obj, children, parent: parent ? parent.hash : null }
+    /* update children */
     children && Object.assign(res, normalize(obj.children, obj))
     return res
   }, {})
+
+  if (parent) {
+    return nodes
+  }
+
+  return {
+    nodes,
+    rootNodes: array.map((e: TNode) => e.hash)
+  }
 }
 
 /**
@@ -77,11 +89,12 @@ function getDescendantIds(node: NNode, nodes: NodeHash, includeSelf = false): st
 /**
  * Used to set a hash prop for all received nodes.
  * Middleware for normalize repository node object before insert to store
- * @param nodes
- * @returns {NodeHash}
+ * @param node {TNode}
+ * @param [isFirst] {boolean}
+ * @returns {TNode}
  */
-function applyHash(node, isFirst = true): NodeHash {
-  let nNode = isFirst ? cloneDeep(node) : node
+function applyHash(node: TNode, isFirst = true): TNode {
+  let nNode: TNode = isFirst ? cloneDeep(node) : node
 
   if (!nNode.hash) {
     nNode.hash = makeId()

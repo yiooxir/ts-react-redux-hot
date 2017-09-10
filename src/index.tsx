@@ -4,7 +4,7 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { Provider } from 'react-redux'
 import { configureStore } from './store/config-store'
-import App from "./App"
+import { App } from "components/application/app"
 
 let store = configureStore()
 
@@ -23,7 +23,7 @@ if (module.hot) {
     const NextApp = require<{'default': typeof App}>("./App").default
     ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <NextApp />
       </Provider>
       ,
       rootEl

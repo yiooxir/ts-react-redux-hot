@@ -1,17 +1,36 @@
 import {Reducer} from "redux";
 import {NodeHash} from "interfaces/node.interface";
+import { take, takeRight, concat } from 'lodash'
 
-const initialState: NodeHash = {}
+interface NodeState {
+  nodes: NodeHash
+  rootNodes: Array<string>
+}
 
-const nodeReducer: Reducer<NodeHash> = (state = initialState, action) => {
+const initialState: NodeState = {
+  nodes: {},
+  rootNodes: []
+}
+
+const nodeReducer: Reducer<NodeState> = (state = initialState, action) => {
   const { type, payload } = action
+  const { rootNodes } = state
 
   switch (type) {
     case 'API_GET_NODE_HASH_SUCCESS':
       return payload
 
     case 'ADD_TO_ROOT':
-      return {...state, ...payload}
+      const takeLength = payload.index === null ? state.rootNodes.length : payload.index + 1
+
+      return {
+        nodes: {...state.nodes, ...payload.nodes},
+        rootNodes: concat(
+          take(rootNodes, takeLength),
+          payload.rootNodes,
+          takeRight(rootNodes, rootNodes.length - takeLength)
+        )
+      }
 
     default:
     case 'API_GET_NODE_HASH_PENDING':
@@ -20,5 +39,6 @@ const nodeReducer: Reducer<NodeHash> = (state = initialState, action) => {
 }
 
 export {
-  nodeReducer
+  nodeReducer,
+  NodeState
 }

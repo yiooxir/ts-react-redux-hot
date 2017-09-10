@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { normalize, getDescendantIds, toTree, applyHash } from './node-helpers'
 
-describe('node-helpers.util', () => {
+describe('util#node-helpers', () => {
   const testHash = [{
     hash: 1,
     name: 1,
@@ -32,12 +32,15 @@ describe('node-helpers.util', () => {
   }]
 
   const testResult = {
-    1: {hash: 1, name: 1, children: [2, 31], parent: null},
-    2: {hash: 2, name: 2, children: [3], parent: 1},
-    3: {hash: 3, name: 3, children: [4], parent: 2},
-    4: {hash: 4, name: 4, children: null, parent: 3, content: '4'},
-    31: {hash: 31, name: 31, children: null, parent: 1, content: 31},
-    11: {hash: 11, name: 11, children: null, parent: null, content: '123'}
+    nodes: {
+      1: {hash: 1, name: 1, children: [2, 31], parent: null},
+      2: {hash: 2, name: 2, children: [3], parent: 1},
+      3: {hash: 3, name: 3, children: [4], parent: 2},
+      4: {hash: 4, name: 4, children: null, parent: 3, content: '4'},
+      31: {hash: 31, name: 31, children: null, parent: 1, content: 31},
+      11: {hash: 11, name: 11, children: null, parent: null, content: '123'}
+    },
+    rootNodes: [1, 11]
   }
 
   describe('#normalize', () => {
